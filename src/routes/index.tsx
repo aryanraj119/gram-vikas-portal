@@ -7,6 +7,9 @@ import heroImage from "@/assets/village-hero.jpg";
 import communityImage from "@/assets/community.jpg";
 import infrastructureImage from "@/assets/infrastructure.jpg";
 
+import { useVillageContext } from "@/lib/village-context";
+import { Users, Building2, BookOpen, Landmark, Route as RouteIcon } from "lucide-react";
+
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: "Aaple Gaon | Digital Gram Panchayat" },
@@ -19,17 +22,48 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { activeVillage } = useVillageContext();
+
+  const dynamicStats = [
+    { label: "Population", value: activeVillage.population.toLocaleString("en-IN"), icon: Users },
+    { label: "Households", value: activeVillage.households.toLocaleString("en-IN"), icon: Building2 },
+    { label: "Literacy rate", value: "86%", icon: BookOpen },
+    { label: "Village wards", value: "6", icon: Landmark },
+    { label: "Total area", value: "12.4 km²", icon: RouteIcon },
+    { label: "Water sources", value: "18", icon: Droplets },
+  ];
+
   return <>
     <section className="relative min-h-[680px] overflow-hidden bg-foreground text-primary-foreground sm:min-h-[720px]">
       <img src={heroImage} alt="Clean village road, banyan tree and Gram Panchayat building in rural Maharashtra" width={1920} height={1080} className="absolute inset-0 size-full object-cover" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.16_0.04_260/.9)_0%,oklch(0.16_0.04_260/.65)_48%,transparent_80%)]" />
       <div className="container-page relative flex min-h-[680px] flex-col justify-center py-20 sm:min-h-[720px]">
-        <div className="max-w-3xl"><p className="mb-4 text-xs font-extrabold uppercase text-primary-foreground/80">Gram Panchayat · Maharashtra</p><h1 className="max-w-2xl text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">Welcome to Our Village</h1><p className="mt-5 text-xl font-semibold text-primary-foreground/90 sm:text-2xl">Smart Village. Empowered People.</p><p className="mt-4 max-w-xl text-sm leading-7 text-primary-foreground/75 sm:text-base">Access services, understand village development and take part in transparent local governance.</p><div className="mt-7 flex flex-wrap gap-3"><Button size="lg" asChild><Link to="/about">Explore village<ArrowRight /></Link></Button><Button size="lg" variant="heroOutline" asChild><Link to="/citizen-services">Citizen services</Link></Button></div></div>
+        <div className="max-w-3xl">
+          <p className="mb-4 text-xs font-extrabold uppercase text-primary-foreground/80">Gram Panchayat · {activeVillage.district} District</p>
+          <h1 className="max-w-2xl text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">Welcome to {activeVillage.name}</h1>
+          <p className="mt-5 text-xl font-semibold text-primary-foreground/90 sm:text-2xl">{activeVillage.marathiName} · LGD Code: {activeVillage.lgdCode}</p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-primary-foreground/75 sm:text-base">Access services, understand village development and take part in transparent local governance led by Sarpanch {activeVillage.sarpanch}.</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button size="lg" asChild><Link to="/about">Explore village<ArrowRight /></Link></Button>
+            <Button size="lg" variant="heroOutline" asChild><Link to="/citizen-services">Citizen services</Link></Button>
+          </div>
+        </div>
         <div className="mt-12"><GlobalSearch inverse /></div>
       </div>
     </section>
 
-    <section className="container-page relative z-10 -mt-12 pb-14"><div className="grid grid-cols-2 gap-3 lg:grid-cols-6">{stats.map(({label,value,icon:Icon}) => <article key={label} className="card-surface p-4 sm:p-5"><Icon className="size-5 text-primary"/><strong className="mt-4 block text-2xl font-extrabold sm:text-3xl">{value}</strong><span className="mt-1 block text-xs font-semibold text-muted-foreground">{label}</span></article>)}</div><div className="mt-5"><DemoNotice/></div></section>
+    <section className="container-page relative z-10 -mt-12 pb-14">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
+        {dynamicStats.map(({label,value,icon:Icon}) => (
+          <article key={label} className="card-surface p-4 sm:p-5">
+            <Icon className="size-5 text-primary"/>
+            <strong className="mt-4 block text-2xl font-extrabold sm:text-3xl">{value}</strong>
+            <span className="mt-1 block text-xs font-semibold text-muted-foreground">{label}</span>
+          </article>
+        ))}
+      </div>
+      <div className="mt-5"><DemoNotice/></div>
+    </section>
 
     <section className="container-page py-12"><SectionHeader eyebrow="Stay informed" title="Alerts & announcements" description="Important notices, meetings and deadlines from your Panchayat." action="View all notices" to="/announcements"/><div className="grid gap-4 lg:grid-cols-3">{[["Important","Gram Sabha scheduled for 28 September","Review the public agenda and submit discussion points.","18 Sep 2026"],["Event","Village health screening camp","Free check-ups at the health sub-centre.","24 Sep 2026"],["Deadline","Property tax assistance week","Get help checking dues and payment options.","30 Sep 2026"]].map(([tag,title,desc,date]) => <article key={title} className="card-surface p-5"><div className="flex items-center justify-between"><span className="status-pill">{tag}</span><time className="text-xs text-muted-foreground">{date}</time></div><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{desc}</p><Link to="/announcements" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-primary">View details<ArrowRight className="size-4" /></Link></article>)}</div></section>
 

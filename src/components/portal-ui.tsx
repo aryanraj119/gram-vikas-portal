@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { type PortalItem, portalSections, services, schemes } from "@/lib/portal-data";
+import { useVillageContext } from "@/lib/village-context";
 
 export function SectionHeader({ eyebrow, title, description, action, to }: { eyebrow?: string; title: string; description?: string; action?: string; to?: string }) {
   return <div className="mb-7 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4"><div className="min-w-0">{eyebrow && <p className="eyebrow">{eyebrow}</p>}<h2 className="section-title">{title}</h2>{description && <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">{description}</p>}</div>{action && to && <Button variant="outline" asChild className="hidden sm:inline-flex"><Link to={to as "/"}>{action}<ArrowRight /></Link></Button>}</div>;
@@ -25,11 +26,12 @@ export function ProgressMetric({ label, value }: { label: string; value: number 
 export function DemoNotice() { return <div className="flex items-start gap-3 rounded-lg border border-warning/25 bg-warning/5 p-4 text-sm leading-6 text-foreground"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-warning" /><p><strong>Demonstration data:</strong> Figures, names, dates and contacts on this preview are sample content. Connect verified Panchayat records before publication.</p></div>; }
 
 export function InteriorPage({ pageKey }: { pageKey: keyof typeof portalSections }) {
-  const content = portalSections[pageKey];
+  const { activeVillage } = useVillageContext();
+  const content = portalSections[pageKey] || portalSections["about"]!;
   const [filter, setFilter] = useState("All");
   const filters = ["All", "Current", "Completed", "Documents"];
   return <div>
-    <section className="page-masthead"><div className="container-page py-14 sm:py-20"><p className="eyebrow">{content.eyebrow}</p><h1 className="page-title max-w-4xl">{content.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">{content.description}</p></div></section>
+    <section className="page-masthead"><div className="container-page py-14 sm:py-20"><p className="eyebrow">{activeVillage.name} · {content.eyebrow}</p><h1 className="page-title max-w-4xl">{content.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">{content.description} — Official records for {activeVillage.name} (LGD Code: {activeVillage.lgdCode}).</p></div></section>
     <section className="container-page py-10 sm:py-14"><DemoNotice/><div className="mt-8 flex flex-wrap gap-2" aria-label="Content filters">{filters.map((item) => <Button key={item} variant={filter === item ? "default" : "outline"} size="sm" onClick={() => setFilter(item)}>{item}</Button>)}</div><div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{content.items.map((item) => <InfoCard key={item.title} item={item} />)}</div></section>
     <FeaturePanel pageKey={pageKey} />
   </div>;

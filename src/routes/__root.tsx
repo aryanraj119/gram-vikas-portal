@@ -4,11 +4,14 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { MobileQuickNav, PortalFooter, PortalHeader } from "@/components/portal-shell";
+import { FloatingBugReportButton } from "@/components/report-bug-modal";
+import { VillageProvider } from "@/lib/village-context";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -120,13 +123,24 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  const isAdmin = routerState.location.pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PortalHeader />
-      <main id="main-content"><Outlet /></main>
-      <PortalFooter />
-      <MobileQuickNav />
+      <VillageProvider>
+        {isAdmin ? (
+          <Outlet />
+        ) : (
+          <>
+            <PortalHeader />
+            <main id="main-content"><Outlet /></main>
+            <PortalFooter />
+            <MobileQuickNav />
+            <FloatingBugReportButton />
+          </>
+        )}
+      </VillageProvider>
     </QueryClientProvider>
   );
 }

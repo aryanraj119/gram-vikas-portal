@@ -10,33 +10,232 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AgricultureRouteImport } from './routes/agriculture'
+import { Route as AnnouncementsRouteImport } from './routes/announcements'
+import { Route as CitizenServicesRouteImport } from './routes/citizen-services'
+import { Route as CultureRouteImport } from './routes/culture'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as EmploymentRouteImport } from './routes/employment'
+import { Route as EnvironmentRouteImport } from './routes/environment'
+import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as GrievancesRouteImport } from './routes/grievances'
+import { Route as InfrastructureRouteImport } from './routes/infrastructure'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as SchemesRouteImport } from './routes/schemes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgricultureRoute = AgricultureRouteImport.update({
+  id: '/agriculture',
+  path: '/agriculture',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnnouncementsRoute = AnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitizenServicesRoute = CitizenServicesRouteImport.update({
+  id: '/citizen-services',
+  path: '/citizen-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CultureRoute = CultureRouteImport.update({
+  id: '/culture',
+  path: '/culture',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmploymentRoute = EmploymentRouteImport.update({
+  id: '/employment',
+  path: '/employment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnvironmentRoute = EnvironmentRouteImport.update({
+  id: '/environment',
+  path: '/environment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrievancesRoute = GrievancesRouteImport.update({
+  id: '/grievances',
+  path: '/grievances',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfrastructureRoute = InfrastructureRouteImport.update({
+  id: '/infrastructure',
+  path: '/infrastructure',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchemesRoute = SchemesRouteImport.update({
+  id: '/schemes',
+  path: '/schemes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/agriculture': typeof AgricultureRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/citizen-services': typeof CitizenServicesRoute
+  '/culture': typeof CultureRoute
+  '/education': typeof EducationRoute
+  '/employment': typeof EmploymentRoute
+  '/environment': typeof EnvironmentRoute
+  '/finance': typeof FinanceRoute
+  '/grievances': typeof GrievancesRoute
+  '/infrastructure': typeof InfrastructureRoute
+  '/progress': typeof ProgressRoute
+  '/projects': typeof ProjectsRoute
+  '/schemes': typeof SchemesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/agriculture': typeof AgricultureRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/citizen-services': typeof CitizenServicesRoute
+  '/culture': typeof CultureRoute
+  '/education': typeof EducationRoute
+  '/employment': typeof EmploymentRoute
+  '/environment': typeof EnvironmentRoute
+  '/finance': typeof FinanceRoute
+  '/grievances': typeof GrievancesRoute
+  '/infrastructure': typeof InfrastructureRoute
+  '/progress': typeof ProgressRoute
+  '/projects': typeof ProjectsRoute
+  '/schemes': typeof SchemesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/agriculture': typeof AgricultureRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/citizen-services': typeof CitizenServicesRoute
+  '/culture': typeof CultureRoute
+  '/education': typeof EducationRoute
+  '/employment': typeof EmploymentRoute
+  '/environment': typeof EnvironmentRoute
+  '/finance': typeof FinanceRoute
+  '/grievances': typeof GrievancesRoute
+  '/infrastructure': typeof InfrastructureRoute
+  '/progress': typeof ProgressRoute
+  '/projects': typeof ProjectsRoute
+  '/schemes': typeof SchemesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/agriculture'
+    | '/announcements'
+    | '/citizen-services'
+    | '/culture'
+    | '/education'
+    | '/employment'
+    | '/environment'
+    | '/finance'
+    | '/grievances'
+    | '/infrastructure'
+    | '/progress'
+    | '/projects'
+    | '/schemes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/agriculture'
+    | '/announcements'
+    | '/citizen-services'
+    | '/culture'
+    | '/education'
+    | '/employment'
+    | '/environment'
+    | '/finance'
+    | '/grievances'
+    | '/infrastructure'
+    | '/progress'
+    | '/projects'
+    | '/schemes'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/agriculture'
+    | '/announcements'
+    | '/citizen-services'
+    | '/culture'
+    | '/education'
+    | '/employment'
+    | '/environment'
+    | '/finance'
+    | '/grievances'
+    | '/infrastructure'
+    | '/progress'
+    | '/projects'
+    | '/schemes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
+  AgricultureRoute: typeof AgricultureRoute
+  AnnouncementsRoute: typeof AnnouncementsRoute
+  CitizenServicesRoute: typeof CitizenServicesRoute
+  CultureRoute: typeof CultureRoute
+  EducationRoute: typeof EducationRoute
+  EmploymentRoute: typeof EmploymentRoute
+  EnvironmentRoute: typeof EnvironmentRoute
+  FinanceRoute: typeof FinanceRoute
+  GrievancesRoute: typeof GrievancesRoute
+  InfrastructureRoute: typeof InfrastructureRoute
+  ProgressRoute: typeof ProgressRoute
+  ProjectsRoute: typeof ProjectsRoute
+  SchemesRoute: typeof SchemesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +247,131 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agriculture': {
+      id: '/agriculture'
+      path: '/agriculture'
+      fullPath: '/agriculture'
+      preLoaderRoute: typeof AgricultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/announcements': {
+      id: '/announcements'
+      path: '/announcements'
+      fullPath: '/announcements'
+      preLoaderRoute: typeof AnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/citizen-services': {
+      id: '/citizen-services'
+      path: '/citizen-services'
+      fullPath: '/citizen-services'
+      preLoaderRoute: typeof CitizenServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/culture': {
+      id: '/culture'
+      path: '/culture'
+      fullPath: '/culture'
+      preLoaderRoute: typeof CultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/employment': {
+      id: '/employment'
+      path: '/employment'
+      fullPath: '/employment'
+      preLoaderRoute: typeof EmploymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/environment': {
+      id: '/environment'
+      path: '/environment'
+      fullPath: '/environment'
+      preLoaderRoute: typeof EnvironmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grievances': {
+      id: '/grievances'
+      path: '/grievances'
+      fullPath: '/grievances'
+      preLoaderRoute: typeof GrievancesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/infrastructure': {
+      id: '/infrastructure'
+      path: '/infrastructure'
+      fullPath: '/infrastructure'
+      preLoaderRoute: typeof InfrastructureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schemes': {
+      id: '/schemes'
+      path: '/schemes'
+      fullPath: '/schemes'
+      preLoaderRoute: typeof SchemesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
+  AgricultureRoute: AgricultureRoute,
+  AnnouncementsRoute: AnnouncementsRoute,
+  CitizenServicesRoute: CitizenServicesRoute,
+  CultureRoute: CultureRoute,
+  EducationRoute: EducationRoute,
+  EmploymentRoute: EmploymentRoute,
+  EnvironmentRoute: EnvironmentRoute,
+  FinanceRoute: FinanceRoute,
+  GrievancesRoute: GrievancesRoute,
+  InfrastructureRoute: InfrastructureRoute,
+  ProgressRoute: ProgressRoute,
+  ProjectsRoute: ProjectsRoute,
+  SchemesRoute: SchemesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
