@@ -19,6 +19,7 @@
  */
 
 @theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -59,22 +60,25 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-warning: var(--warning);
+  --color-map: var(--map);
+  --shadow-panel: var(--shadow-panel);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.75rem;
+  --background: oklch(0.984 0.003 247.858);
+  --foreground: oklch(0.208 0.042 265.755);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
+  --primary: oklch(0.566 0.143 162.4);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
+  --muted-foreground: oklch(0.48 0.04 257.417);
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
@@ -95,6 +99,9 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --warning: oklch(0.58 0.19 45);
+  --map: oklch(0.92 0.045 155);
+  --shadow-panel: 0 4px 10px -3px color-mix(in oklab, var(--foreground) 10%, transparent);
 }
 
 .dark {
@@ -140,5 +147,28 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    letter-spacing: 0;
   }
+
+  button, a, input { outline-color: var(--color-ring); }
+  button { cursor: pointer; }
+  h1, h2, h3 { letter-spacing: 0; }
 }
+
+@utility container-page { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1rem; @media (min-width: 640px) { padding-inline: 1.5rem; } @media (min-width: 1024px) { padding-inline: 2rem; } }
+@utility card-surface { border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-card); box-shadow: var(--shadow-panel); transition: transform 180ms ease, box-shadow 180ms ease; &:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px color-mix(in oklab, var(--foreground) 20%, transparent); } }
+@utility icon-well { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: 999px; background: color-mix(in oklab, var(--primary) 11%, transparent); color: var(--color-primary); & svg { width: 1.25rem; height: 1.25rem; } }
+@utility status-pill { display: inline-flex; align-items: center; min-height: 1.75rem; border-radius: 999px; background: var(--color-muted); padding-inline: .65rem; font-size: .7rem; font-weight: 700; color: var(--color-muted-foreground); }
+@utility eyebrow { margin-bottom: .5rem; font-size: .72rem; font-weight: 800; text-transform: uppercase; color: var(--color-primary); }
+@utility section-title { font-size: clamp(1.6rem, 3vw, 2rem); line-height: 1.2; font-weight: 800; color: var(--color-foreground); }
+@utility page-title { font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.08; font-weight: 800; color: var(--color-foreground); }
+@utility section-band { border-block: 1px solid var(--color-border); background: color-mix(in oklab, var(--muted) 55%, var(--background)); }
+@utility page-masthead { border-bottom: 1px solid var(--color-border); background: linear-gradient(120deg, color-mix(in oklab, var(--primary) 8%, var(--background)), var(--background)); }
+@utility map-grid { background-image: linear-gradient(color-mix(in oklab, var(--primary) 13%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 13%, transparent) 1px, transparent 1px); background-size: 28px 28px; }
+@utility skip-link { position: fixed; top: .5rem; left: .5rem; z-index: 100; transform: translateY(-150%); border-radius: .5rem; background: var(--color-primary); padding: .75rem 1rem; color: var(--color-primary-foreground); &:focus { transform: translateY(0); } }
+
+.large-text { font-size: 112.5%; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
